@@ -1,0 +1,49 @@
+<!--
+    This file contains Runtime Directives used by .NET Native. The defaults here are suitable for most
+    developers. However, you can modify these parameters to modify the behavior of the .NET Native
+    optimizer.
+
+    Runtime Directives are documented at https://go.microsoft.com/fwlink/?LinkID=391919
+
+    To fully enable reflection for App1.MyClass and all of its public/private members
+    <Type Name="App1.MyClass" Dynamic="Required All"/>
+
+    To enable dynamic creation of the specific instantiation of AppClass<T> over System.Int32
+    <TypeInstantiation Name="App1.AppClass" Arguments="System.Int32" Activate="Required Public" />
+
+    Using the Namespace directive to apply reflection policy to all the types in a particular namespace
+    <Namespace Name="DataClasses.ViewModels" Serialize="All" />
+-->
+
+<Directives xmlns="http://schemas.microsoft.com/netfx/2013/01/metadata">
+  <Application>
+    <!--
+      An Assembly element with Name="*Application*" applies to all assemblies in
+      the application package. The asterisks are not wildcards.
+    -->
+    <Assembly Name="*Application*" Dynamic="Required All" />
+    
+    <!-- Add your application specific runtime directives here. -->
+    
+    <!-- Added directives below in attempt to get .NET Native compilation working, but it still fails with Internal Compiler Error, ITL0005. -->
+    <!-- It seems that nutc_driver.exe fails after having allocated more than 3GB of memory. As a 32-bit process, maybe out of memory? -->
+    <Assembly Name="EFCoreCPTest" Dynamic="Required All" DoNotInline="true" DoNotOptimize="true"/>
+    <Assembly Name="Microsoft.Data.Sqlite" Dynamic="Required All" DoNotInline="true" DoNotOptimize="true"/>
+    <Assembly Name="Microsoft.EntityFrameworkCore" Dynamic="Required All" DoNotInline="true" DoNotOptimize="true"/>
+    <Assembly Name="Microsoft.EntityFrameworkCore.InMemory" Dynamic="Required All" DoNotInline="true" DoNotOptimize="true"/>
+    <Assembly Name="Microsoft.EntityFrameworkCore.Relational" Dynamic="Required All" DoNotInline="true" DoNotOptimize="true"/>
+    <Assembly Name="Microsoft.EntityFrameworkCore.Sqlite" Dynamic="Required All" DoNotInline="true" DoNotOptimize="true"/>
+    <Assembly Name="Microsoft.Extensions.Caching.Memory" Dynamic="Required All" DoNotInline="true" DoNotOptimize="true"/>
+    <Assembly Name="Microsoft.Extensions.Options" Dynamic="Required All" DoNotInline="true" DoNotOptimize="true"/>
+    <Assembly Name="Microsoft.Extensions.Primitives" Dynamic="Required All" DoNotInline="true" DoNotOptimize="true"/>
+    <Assembly Name="Remotion.Linq" Dynamic="Required All" DoNotInline="true" DoNotOptimize="true"/>
+    <Assembly Name="System.Interactive.Async" Dynamic="Required All" DoNotInline="true" DoNotOptimize="true"/>
+    <Assembly Name="xunit.abstractions" Dynamic="Required All" DoNotInline="true" DoNotOptimize="true"/>
+    <Assembly Name="xunit.assert" Dynamic="Required All" DoNotInline="true" DoNotOptimize="true"/>
+    <Assembly Name="xunit.core" Dynamic="Required All" DoNotInline="true" DoNotOptimize="true"/>
+    <Assembly Name="xunit.execution.dotnet" Dynamic="Required All" DoNotInline="true" DoNotOptimize="true"/>
+    <Assembly Name="xunit.runner.devices" Dynamic="Required All" DoNotInline="true" DoNotOptimize="true"/>
+    <Assembly Name="xunit.runner.utility.netstandard15" Dynamic="Required All" DoNotInline="true" DoNotOptimize="true"/>
+    
+  </Application>
+</Directives>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<linker>
+	<!--
+		LinkDescription.xml. Can be used to prevents runtime errors when reflection is used for certain types that
+		are not otherwise referenced directly in the project, and that would be removed by the Xamarin linker.
+	
+		For a Xamarin.iOS project, include in build settings "Additional mtouch arguments", with real hyphens:
+			[hyphen][hyphen]xml=${ProjectDir}/LinkDescription.xml
+
+		For a Xamarin.Android project, just set this file's build action to "LinkDescription".
+
+		Example content:
+		
+		<assembly fullname="System.Core">
+			<type fullname="System.Linq.Queryable"></type>
+		</assembly>
+	-->
+</linker>
